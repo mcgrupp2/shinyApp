@@ -5,25 +5,33 @@ dataset <- diamonds
 
 fluidPage(
   
-  titlePanel("Diamonds Explorer"),
+  titlePanel("Beer IBU/ABV Explorer"),
   
   sidebarPanel(
     
-    sliderInput('sampleSize', 'Sample Size', min=1, max=nrow(dataset),
-                value=min(1000, nrow(dataset)), step=500, round=0),
+    # Copy the line below to make an action button
+    #actionButton("action", label = "Make Plots"),
     
-    selectInput('x', 'X', names(dataset)),
-    selectInput('y', 'Y', names(dataset), names(dataset)[[2]]),
-    selectInput('color', 'Color', c('None', names(dataset))),
+    #hr(),
+    #fluidRow(column(2, verbatimTextOutput("value")),
     
-    checkboxInput('jitter', 'Jitter'),
-    checkboxInput('smooth', 'Smooth'),
+    #sliderInput('sampleSize', 'Sample Size', min=1, max=nrow(dataset),
+                #value=min(1000, nrow(dataset)), step=500, round=0),
     
-    selectInput('facet_row', 'Facet Row', c(None='.', names(dataset))),
-    selectInput('facet_col', 'Facet Column', c(None='.', names(dataset)))
+    #selectInput('IBU', 'IBU', names(dataset)),
+    #selectInput('ABV', 'ABV', names(dataset), names(dataset)[[2]]),
+    #selectInput('color', 'Color', c('None', names(dataset))),
+    
+    checkboxInput('Plot_IBU', 'Plot IBU(s)'),
+    checkboxInput('Plot_ABV', 'Plot ABV(s)'),
+    
+    selectInput('ibu_type', 'Plot Type', c("Histogram", "Boxplot")),
+    selectInput('abv_type', 'Plot Type', c("Histogram", "Boxplot"))
   ),
   
   mainPanel(
-    plotOutput('plot')
+    plotOutput('ibuPlot'),
+    hr(),
+    plotOutput('abvPlot')
   )
 )
